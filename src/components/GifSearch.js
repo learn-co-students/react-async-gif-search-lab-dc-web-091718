@@ -1,7 +1,21 @@
 import React from 'react';
 
-const GifSearch = () => {
-    return <div>GifSearch</div>
-};
+export default class GifSearch extends React.Component  {
+    state= {
+        query: ""
+    }
 
-export default GifSearch;
+    handleSubmit = event  => {
+        event.preventDefault();
+        this.props.search(this.state.query);
+    }
+
+    render () {
+        return (
+            <form onSubmit={this.handleSubmit}>
+                <label >Search:</label>
+                <input type="text" value={this.state.query} onChange={event => this.setState({query: event.target.value})} />
+                <input type="submit"/>
+            </form>
+    )};
+}

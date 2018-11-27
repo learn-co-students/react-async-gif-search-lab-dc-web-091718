@@ -7,12 +7,11 @@ export default class GifListContainer extends Component {
         super();
         this.state = {
             gifs: [],
-            searchTerm: "JS"
         }
     }
 
-    fetchGifs = () => {
-        fetch(`http://api.giphy.com/v1/gifs/search?q=${this.state.searchTerm}&api_key=dc6zaTOxFJmzC&rating=g`)
+    fetchGifs = (searchTerm) => {
+        fetch(`http://api.giphy.com/v1/gifs/search?q=${searchTerm}&api_key=dc6zaTOxFJmzC&rating=g`)
         .then(res => res.json())
         .then(json => {
             this.setState({
@@ -22,14 +21,14 @@ export default class GifListContainer extends Component {
     };
 
     componentDidMount() {
-        this.fetchGifs();
+        this.fetchGifs("JS");
     }
 
     render () {
         return ( 
-            <div>Gif Container
-                <GifSearch />
-                <GifList />
-            </div>
+            <ul className="container">
+                <GifSearch search={this.fetchGifs} />
+                {this.state.gifs.map(gif => <GifList gif ={gif} key={gif.id} />)}
+            </ul>
         )};
 };
