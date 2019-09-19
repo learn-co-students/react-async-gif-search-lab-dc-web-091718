@@ -20,20 +20,35 @@ class GifListContainer extends React.Component {
     fetch(URL+this.state.searchTerm+API_KEY)
     .then(res=> res.json())
     .then(result =>
-      this.setState({threeGifs: [ result.data[0], result.data[1], result.data[2] ]}))
+      this.setState(
+        {
+          threeGifs: [result.data[0], result.data[1], result.data[2]]
+        }
+      )
+    )
+
   }
 
   onSubmitSearchTerm = (searchTerm) => {
-    this.setState({
-      searchTerm: searchTerm
-    })
+
+    if (searchTerm) {
+      this.setState({
+        searchTerm: searchTerm
+      })
+    }
+    else {
+      this.setState({
+        searchTerm: 'uh oh'
+      })
+    }
   }
 
   render(){
   return(
     <div>
-      <GifSearch submitSearchTerm={this.onSubmitSearchTerm}/>
-      {<GifList gifs={this.state.threeGifs} />}
+      <GifSearch submitSearchTerm={this.onSubmitSearchTerm} searchTerm={this.state.searchTerm} />
+      {<GifList gifs={this.state.threeGifs}/>}
+
     </div>
   )}
 }

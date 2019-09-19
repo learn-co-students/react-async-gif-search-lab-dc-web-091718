@@ -6,7 +6,8 @@ import NavBar from './NavBar'
 
 function App() {
   return (
-    <div>
+    <div
+      style={{textAlign: "center"}}>
       <NavBar title={"Giphy Search"} />
       <GifListContainer />
     </div>

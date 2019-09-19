@@ -9,7 +9,10 @@ const NavBar= (props) =>{
   return (
     <nav className={`navbar ${colors[props.color]}`}>
       <div className='container-fluid'>
-        <div className='navbar-header'>
+        <div
+          className='navbar-header'
+          style={{color: "pink"}}
+        >
           <a className='navbar-brand'>
             <h1>{ props.title }</h1>
           </a>
